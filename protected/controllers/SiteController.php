@@ -171,6 +171,7 @@ class SiteController extends Controller
 		$model=new ContactForm;
 		if(isset($_POST['ContactForm']))
 		{
+			Yii::log("Correo recibido de: nombre:".$_POST['ContactForm']['name']."<".$_POST['ContactForm']['email']."> Asunto: ".$_POST['ContactForm']['subject'],CLogger::LEVEL_INFO,"system.web.CController");
 			$model->attributes=$_POST['ContactForm'];
 			if($model->validate())
 			{
