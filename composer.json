@@ -1,0 +1,7 @@
+{
+    "name": "yii/publicidad",
+    "description": "advertising webapp",
+    "require": {
+        "monolog/monolog": "2.9.*"
+    }
+}

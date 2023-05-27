@@ -1,0 +1,133 @@
+#yuicarusel{margin-bottom:0 !important;}
+
+#page {
+    /*padding-top: 60px;*/
+}
+body{
+
+	/*background-image: url('/relojeriaortiz/images/bgbody.jpg');*/
+	background-repeat: repeat-x;
+}
+
+/*estilos de ultra commerce*/
+
+/*contenedores*/
+#div-main-content{background-color:white;}
+#category-content{background: white;}
+#product-detail-content{background-color: white;}
+.outercontent{background: white;box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);}
+#search-content{background: white;}
+
+/*contenedores*/
+
+/*breadcrumbs*/
+.breadcrumbs{margin-bottom:0 !important;border-bottom-left-radius:0 !important; border-bottom-right-radius:0 !important }
+/* //breadcrumbs*/
+
+/*ESTILOS PARA EL COMPONENTE DE MAIN-PRODUCTS*/
+/*bigtitle es el titulo que aparece en el componente de productos principales*/
+.bigtitle{
+/*border-top-left-radius:3px;*/
+/*border-top-right-radius:3px;*/
+background-color:#a91515;
+margin-left:0 !important;
+margin-top: 3px;
+margin-bottom: 3px;
+color:white;
+}
+.bigtitle h4{
+font-family: "Open Sans";
+font-size:14px !important;
+text-transform: uppercase;
+}
+
+/*es el estilo de los parrafos que estan en el componente de productos principales*/
+.main-products p{
+  text-indent: 20px;
+}
+/*FIN DE ESTILOS PARA EL COMPONENTE DE MAIN-PRODUCTS*/
+
+/*estilos para CStores widget*/
+.stores p{
+  text-indent: 20px;
+}
+/*product detail*/
+.description p{
+  text-indent: 20px;
+}
+.same-category{
+border-top-left-radius:3px;
+border-top-right-radius:3px;
+background-color:#dfdfdf;
+margin-left:0 !important;
+margin-top: 3px;
+margin-bottom: 3px;
+padding-left:5px;
+}
+
+/*estilo footer*/
+.footer{
+	background: black;
+	color: white;
+	height: 16em;
+}
+.footer .headers{
+	font-family:'Open Sans',sans-serif;
+	text-transform: uppercase;
+}
+
+/*frase del dia*/
+.phraseday{
+background-color:#589AD6;
+margin-left:0 !important;
+margin-top: 3px;
+margin-bottom: 3px;
+color:white;
+}
+
+/*vista categoria*/
+@font-face{font-family:'Open Sans';
+src:url("/ultracommerce/assets/fonts/opensans.woff");
+format("woff"),url("/ultracommerce/assets/fonts/opensans.woff") 
+}
+.item-category
+{margin-bottom:10px;padding:5px;border:1px solid #dedede; width:175px; 
+	position:relative; font-size:12px;float:left;height:270px}
+.item-category div#img-wrapper{text-align:center; height:180px}
+.item-category span#name{font-weight:bold;text-align:left;color:#2261ad;}
+.item-category span#price{font-weight:bold;text-align:left;color:#c20000;}
+.item-category span#instock{font-weight:bold;text-align:left;color:#1b6800;}
+.item-category span#new{font-weight: bold;text-align: left;border-radius: 3px;background: #4276FA;color: rgb(255, 255, 255);padding: 3px 5px;}
+/*es donde aparece el sort by en la vista de productos por categoria*/
+.filters{background:#F5F5F5; height:100px;padding-left: 20px;margin-bottom: 10px}
+.filter-bar{margin-top: 20px;}
+.filter-bar span#title{font-size: 1.5em;}
+.filter-element{width:100%;border:1px solid #dedede;float:left; padding-bottom:10px; margin-bottom:20px;}
+.filter-element div#filter-item{border-bottom:1px solid #dedede;}
+.link-pressed{background-color: #cecece}
+#main-title{font-size: 24px;color: #2261ad;}
+/*Search Box*/
+#search-span{font-size:1.7em; /*color:white;*/}
+
+
+/*main posts in index*/
+.mainposts{float:left;}
+.mainposts div.title a{color: black;
+font-size: 14pt;
+text-decoration: none;
+font-family: sans-serif;
+line-height: 1.3em;}
+.mainposts div.author{color:#A7A7A7; font-size:10pt;}
+.mainposts div.span4{width:150px;}
+.mainposts div.span4 div.image{text-align: center;}
+.mainposts div.span4 div.image img{height: 144px;}
+.mainposts div.content{}
+.mainposts div.nav{}
+
+/*para el view del post del lado del usuario normal*/
+.post{}
+.post div.title{}
+.post div.author{}
+.post div.content{font-family:Open Sans; color:#555555;}
+.post div.nav{}
+

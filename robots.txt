@@ -1,0 +1,1 @@
+sitemap: http://www.codetcha.com/robots.txt

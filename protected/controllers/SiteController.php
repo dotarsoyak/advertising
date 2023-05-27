@@ -1,0 +1,237 @@
+<?php
+
+class SiteController extends Controller
+{
+	/**
+	 * Declares class-based actions.
+	 */
+	// public $layout = '//layouts/main';
+	public $layout = '//layouts/boutique';
+
+	public $model;
+	
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl',  // perform access control for CRUD operations
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow', 
+				'actions'=>array('index',  'AddUser',  'captcha',  'view',  'page',  'contact',  'login'
+					             ,  'logout',  'suscribe',  'error',  'sitemap'), 
+				'users'=>array('*'), 
+			), 
+			array('allow', 
+				'actions'=>array('update',  'create',  'admin',  'delete',  'profile'), 
+				// 'users'=>array('@'), 
+			 	'roles'=>array('super',  'admin'), 
+			), 
+			array('deny', 
+				'users'=>array('*'), 
+			), 
+		);
+	}
+
+	public function actions()
+	{
+		return array(
+			// captcha action renders the CAPTCHA image displayed on the contact page
+			'captcha'=>array(
+				'class'=>'CCaptchaAction', 
+				'backColor'=>0xFFFFFF, 
+			), 
+			// page action renders "static" pages stored under 'protected/views/site/pages'
+			// They can be accessed via: index.php?r=site/page&view=FileName
+			'page'=>array(
+				'class'=>'CViewAction', 
+			), 
+			'yiifilemanagerfilepicker'=>array(
+	    	'class'=>'ext.yiifilemanagerfilepicker.YiiFileManagerFilePickerAction'
+    	), 
+		);
+	}
+
+	/**
+	 * This is the default 'index' action that is invoked
+	 * when an action is not explicitly requested by users.
+	 */
+	public function actionIndex()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->layout = 'main';
+		$this->pageTitle = Yii::app()->name.' - directorio publicitario gratuito';
+		Yii::app()->name='Publicidad';
+		Yii::app()->clientScript->registerMetaTag(Yii::app()->name.' directorio publicitario gratuito'
+																											,  'description');
+		Yii::app()->clientScript->registerMetaTag("anuncio clasificado, anuncio clasificados, anuncio publicitario, anuncios clasificados, anuncios clasificados gratis, anuncios clasificados gratis en mexico, anuncios clasificados gratuitos, anuncios clasificados culiacán, anuncios clasificados méxico, anuncios publicitarios, anuncios publicitarios gratis, anuncios y clasificados gratis, anunciosclasificados, anunciosgratis, aviso clasificado, avisos clasificados, avisos de ocasión, avisos económicos, avisos gratuitos, clasificado, clasificado gratis, clasificados, clasificados en internet, clasificados gratis, clasificados gratis en internet, clasificados gratis en mexico, clasificados gratis culiacán, clasificados gratuitos, clasificados publicar gratis, como crear un anuncio publicitario, como hacer anuncios de publicidad, como hacer anuncios publicitarios gratis, como hacer publicidad en internet, como hacer publicidad en internet gratis, como hacer publicidad gratis, como hacer publicidad gratis en internet, como hacer una publicidad, crear publicidad, crear un anuncio publicitario, hacer anuncio gratis, hacer anuncios, hacer anuncios gratis, hacer anuncios online, hacer propaganda online, hacer publicidad, hacer publicidad gratis, hacer publicidad gratis en internet, hacer publicidad online, hacer publicidad online gratis, hacer un anuncio gratis, los clasificados, lugares para publicar gratis, paginas de clasificados, paginas publicitarias, para publicar gratis, portales para publicar gratis, programas para publicidad, publicar, publicar clasificado gratis, publicar clasificados gratis, publicar gratis clasificados, publicidad, publicidad en la red, publicidad en linea, publicidad gratis, publicidad gratuita, sitios para publicar gratis"
+																															,  'keywords');		
+		Yii::app()->clientScript->registerMetaTag("es",  'language');		
+
+		// $this->render('index', array(
+		// 	// 'postProvider'=>$posts, 
+		// ));
+		$this->render('index',  array(
+			// 'postProvider'=>$posts, 
+		));
+	}
+
+	public function actionSuscribe()
+	{
+		$model = new Newsletter();
+
+		if(isset($_POST))
+		{
+			$model->attributes = $_POST['Newsletter'];
+			$model->save();
+				// echo var_dump($model->getErrors());// return;
+				// $this->redirect(Yii::app()->homeUrl,  array('newsletter'=>$model));
+		}
+		$this->render('boutique',  array('newsletter'=>$model));
+	}
+
+	public function actionAdmin()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->layout = 'admin';
+
+		$this->render('admin');
+	}
+
+	/**
+	 * This is the action to handle external exceptions.
+	 */
+	public function actionError()
+	{
+		if($error=Yii::app()->errorHandler->error)
+		{
+			if(Yii::app()->request->isAjaxRequest)
+				echo $error['message'];
+			else
+				$this->render('error',  $error);
+		}
+	}
+
+  public function actionAddUser()
+  {
+  	$this->layout='main';
+  	Yii::app()->name='Publicidad';
+  	$model=new RegistrationForm();
+
+		if(isset($_POST['RegistrationForm']))
+		{
+			$model->attributes=$_POST['RegistrationForm'];
+			
+			if(!$model->validate()){
+  			$this->render('registration', array(
+  		    'model'=>$model, 
+				));
+				return;
+			}else{
+				$user = new User();
+				$user->username=$model->username;
+				$user->password= sha1($model->password);
+				$user->email=$model->email;
+				$user->profile='normal';
+
+				if($user->save()){
+					$auth=Yii::app()->authManager;
+					// $rol=$auth->createRole('doctor');
+					// $rol=$auth->createRole('secre');
+					$auth->assign('publish',  $user->id);
+
+					Yii::app()->user->setFlash('registration',  "Thank you for your registration. Please login.");
+				}
+			}
+		}
+  	$this->render('registration', array(
+  		    'model'=>$model, 
+				));
+  }
+
+	/**
+	 * Displays the contact page
+	 */
+	public function actionContact()
+	{
+		$this->layout = 'main';
+		$model=new ContactForm;
+		if(isset($_POST['ContactForm']))
+		{
+			$model->attributes=$_POST['ContactForm'];
+			if($model->validate())
+			{
+				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$headers="From: $name <{$model->email}>\r\n".
+					"Reply-To: {$model->email}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-type: text/plain; charset=UTF-8";
+
+				mail(Yii::app()->params['adminEmail'], $subject, $model->body, $headers);
+				Yii::app()->user->setFlash('contact', 'Gracias por contactarnos. Le responderemos tan pronto como nos sea posible.');
+				$this->refresh();
+			}
+		}
+		$this->render('contact', array('model'=>$model));
+	}
+
+	/**
+	 * Displays the login page
+	 */
+	public function actionLogin()
+	{
+		$model=new LoginForm;
+		$this->layout = '//layouts/main';
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login())
+				$user=User::model()->findByPk(Yii::app()->user->getId());
+
+				if( isset($user) && ( $user->profile == 'admin' || $user->profile == 'super' ) )
+					$this->redirect(Yii::app()->baseUrl.'/index.php/site/admin');
+				else
+					$this->redirect(Yii::app()->user->returnUrl);
+		}
+		// display the login form
+		$this->render('login', array('model'=>$model));
+	}
+
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionSitemap()
+	{
+		$this->render('sitemap');
+	}
+
+}

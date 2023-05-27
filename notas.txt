@@ -1,0 +1,12 @@
+-- al guardar en prefijo de la base de datos, tambien guarda el nombre
+   del usuario que creó la tienda, eso te servirá para rastrear.
+-- poder descargar la direccion del anuncio.
+-- poder ver folleto del anuncio.
+-- poner un captcha en el creador de sitios.
+-- que puedan poner comentarios en la pagina de la info detallada.
+
+
+HACER PARA CUALQUIER IMAGEN QUE SE SUBA AL SERVIDOR
+
+-- Reemplazar espacios con guiones
+-- Reemplazar enies con enes, remplazar letras con acentos por letra comunes.
