@@ -114,6 +114,7 @@ $cs->registerCoreScript('jquery');
 							</li>
 						</ul>
 					</li>
+					<?php if(User::model()->getRole() == 'publish'): ?>
 					<li id='title'>
 						Contenidos
 					</li>
@@ -172,6 +173,7 @@ $cs->registerCoreScript('jquery');
 							</li>
 						</ul>
 					</li>
+					<?php endif; ?>
 				</ul>
 			</div>
 			<div style="background:white;float:left;width:85%;padding-left:1%;min-height: 570px;">

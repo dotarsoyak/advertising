@@ -35,7 +35,7 @@ class SiteController extends Controller
 			), 
 			array('allow', 
 				'actions'=>array('update',  'create',  'admin',  'delete',  'profile'), 
-				// 'users'=>array('@'), 
+				 'users'=>array('@'), 
 			 	'roles'=>array('super',  'admin'), 
 			), 
 			array('deny', 

@@ -125,6 +125,13 @@ class ProductController extends Controller
 				$model->color = $_POST['Product']['color'];
 				$model->user_id=Yii::app()->user->id;
 
+				if(!$model->validate()){
+					$this->render('create',array(
+						'model'=>$model,
+					));					
+					return;
+				}
+
 				if($image===null){
 					Yii::app()->user->setFlash("missImage", "Debes agregar una imagen principal a tu anuncio para poder continuar.");
 					$this->render('create',array(
@@ -145,6 +152,7 @@ class ProductController extends Controller
 				}
 
 				if(!$model->save()){
+					Yii::log("Ocurrió un error al guardar el producto: ".print_r($model->getErrors(), 1) ,CLogger::LEVEL_ERROR, "system.web.CController");
 					$valid_post = false;
 				}
 
@@ -503,6 +511,7 @@ class ProductController extends Controller
 	 */
 	public function loadModel($id)
 	{
+		Yii::log("Trying to load model id: {$id}",CLogger::LEVEL_INFO,"system.web.CController");
 		$model=Product::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');

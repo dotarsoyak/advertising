@@ -7,7 +7,7 @@ $config=dirname(__FILE__).'/protected/config/main.php';
 
 require_once($yii);
 
-defined('YII_DEBUG') or define('YII_DEBUG',true);
+defined('YII_DEBUG') or define('YII_DEBUG', false);
 
 // Yii::createWebApplication($config)->run();
 // enable gzip compression
